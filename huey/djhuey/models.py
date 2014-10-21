@@ -7,7 +7,8 @@ class HueyQueue(models.Model):
     class Meta:
         db_table = 'huey_queue'
 
-    item = models.TextField()
+    item = models.BinaryField()
+    key = models.CharField(max_length=255, db_index=True)
     created = models.DateTimeField(auto_now=True, editable=False)
 
 
@@ -15,7 +16,7 @@ class HueySchedule(models.Model):
     class Meta:
         db_table = 'huey_schedule'
 
-    item = models.TextField()
+    item = models.BinaryField()
     ts = models.PositiveIntegerField(db_index=True)
     created = models.DateTimeField(auto_now=True, editable=False)
 
@@ -25,7 +26,7 @@ class HueyResult(models.Model):
         db_table = 'huey_result'
 
     key = models.CharField(max_length=255, db_index=True)
-    result = models.TextField()
+    result = models.BinaryField()
     created = models.DateTimeField(auto_now=True, editable=False)
 
 

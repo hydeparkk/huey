@@ -28,7 +28,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('created', models.DateTimeField(auto_now=True, editable=False)),
-                ('item', models.TextField()),
+                ('item', models.BinaryField()),
+                ('key', models.CharField(max_length=255, db_index=True)),
             ],
             options={
                 'db_table': 'huey_queue',
@@ -41,7 +42,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('created', models.DateTimeField(auto_now=True, editable=False)),
                 ('key', models.CharField(max_length=255, db_index=True)),
-                ('result', models.TextField()),
+                ('result', models.BinaryField()),
             ],
             options={
                 'db_table': 'huey_result',
@@ -53,7 +54,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('created', models.DateTimeField(auto_now=True, editable=False)),
-                ('item', models.TextField()),
+                ('item', models.BinaryField()),
                 ('ts', models.PositiveIntegerField(db_index=True)),
             ],
             options={

@@ -30,14 +30,15 @@ class DjangoQueue(BaseQueue):
         self._alias = alias
 
     def write(self, data):
-        HueyQueue.objects.using(self._alias).create(item=data)
+        task_id = pickle.loads(data)[0]
+        HueyQueue.objects.using(self._alias).create(item=data, key=task_id)
 
     @synchronized_method
     def read(self):
         try:
             obj = HueyQueue.objects.using(self._alias).all().order_by('id')[0]
             obj.delete(self._alias)
-            return str(obj.item)
+            return obj.item
         except IndexError:
             return None
 
