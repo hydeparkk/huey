@@ -17,6 +17,7 @@ class HueySchedule(models.Model):
         db_table = 'huey_schedule'
 
     item = models.BinaryField()
+    key = models.CharField(max_length=255, db_index=True)
     ts = models.PositiveIntegerField(db_index=True)
     created = models.DateTimeField(auto_now=True, editable=False)
 

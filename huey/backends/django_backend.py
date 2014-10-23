@@ -62,7 +62,7 @@ class DjangoSchedule(BaseSchedule):
         self._alias = alias
 
     def add(self, data, ts):
-        HueySchedule.objects.using(self._alias).create(item=pickle.dumps(data), ts=convert_ts(ts))
+        HueySchedule.objects.using(self._alias).create(item=data, ts=convert_ts(ts), key=pickle.loads(data)[0])
 
     def read(self, ts):
         qs = HueySchedule.objects.using(self._alias).filter(ts__lte=convert_ts(ts))
